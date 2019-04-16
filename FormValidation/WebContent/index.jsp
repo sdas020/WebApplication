@@ -10,7 +10,7 @@
 <title>Flight booking System</title>
 <h1>Welcome to Flight booking System</h1>
 </head>
-<body>
+<body BACKGROUND="image.jpeg">
 <form > 
 <label>SourcePoint</label>   
 <select name="SourcePoint" >  
@@ -68,5 +68,6 @@ Mobile Number:<br>
 <br><br>
 <input type="submit" name="save" value="submit">
 </form>-->
+
 </body>
 </html>
