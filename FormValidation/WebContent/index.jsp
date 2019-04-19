@@ -48,20 +48,17 @@ enter number of seats to book:<input type="number" name="NumberOfTicket" id="num
 <div id="container">
 </div>
 <p>
-<label>Number of Passengers: </label>
-  <input type="text" name="passengers" maxlength="2" size="1" id="passdet" value="" onkeypress="return isNumber(event)">
-  <input id="addpass" type="submit" class="btn btn-large btn-primary" onclick="addTables()" value="Add" disabled>
-  <span id="tablerr"></span>
-</p>
+
 <!--  <marquee behavior="alternate"><img src="AirIndia.jpg" href="http://www.airindia.in/"
 src="SpiceJetAirliness.jpg" href="https://www.spicejet.com/"-->
-c></marquee>
+
 <!--<marquee behavior="alternate"><img src="SpiceJetAirliness.jpg" href="https://www.spicejet.com/"></marquee>
 <marquee behavior="alternate"><img src="Indigo.jpg" href="https://www.goindigo.in/" ></marquee>-->
 <marquee >
-<div style="width:900;  height:250px; overflow:scroll; overflow-x: scroll;overflow-y: hidden;">
+<div style="width:1200;  height:400px; overflow:scroll; overflow-x: scroll;overflow-y: hidden;">
 
-      <img src="AirIndia.jpg" nlick()="AirIndia()"/>
+      <img src="AirIndia.jpg" alt="AirIndia" usemap="AirIndia" onlick="AirIndia()"/>
+      
       <img src="SpiceJetAirliness.jpg" ="https://www.spicejet.com/"/>
       <img src="Indigo.jpg" href="https://www.goindigo.in/" >
      

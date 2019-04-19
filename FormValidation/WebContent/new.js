@@ -182,9 +182,7 @@ function totalPrice(){
 	}
 	return tot;
 }
-function AirIndia(){
-	document.open("http://www.airindia.in/");
-}
+
 
 $(document).ready(function(){
 	var dtToday = new Date(); 
