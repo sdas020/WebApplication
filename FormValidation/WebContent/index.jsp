@@ -33,18 +33,21 @@
 </p>
 <p>
 <label>Return Date: </label>
-<input type="date" id="rtdate" name="rday" onchange="selectdate()">
+<input type="date" id="rtdate" name="rday" onclick="verifyDates()">
 <span id="errrtdate"></span> 
 </p>
-enter email:<input type="text" name="userEmail"/>
+enter email:<input type="email" name="userEmail" />
 enter number of seats to book:<input type="number" name="NumberOfTicket" id="numberofticket" value=""/> 
-<button type="button" class="Seats availability" name="Seats availability" onclick="ticketsAvailability()">Check seats availability</button>
+<button type="button" class="Seats availability" name="Seats availability" onclick="ticketsAvailability()" >Check seats availability</button>
 <div id="passform">
 </div>
 <p id="message"></p>
-<input id="prcbtn" type="submit" onclick="getPrice()" value="Estimate Price" disabled>
-<input id="subbtn" type="submit" onclick="succMsg()" value="Book Now" disabled>
-
+<div id="smtfinal">
+<span id="totalspan"></span>
+<input id="prcbtn" type="button" onclick="getPrice()" value="Estimate Price" >
+<input id="subbtn" type="button" onclick="succMsg()" value="Book Now" >
+<span id="tsuccessmesg"></span>
+</div>
 <div id="container">
 </div>
 <p>

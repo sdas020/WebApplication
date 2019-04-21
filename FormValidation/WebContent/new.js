@@ -16,6 +16,21 @@ function ticketsAvailability1() {
   }
 }
 function ticketsAvailability() {
+	var d1 = document.getElementById("stdate").value;
+	var d2 = document.getElementById("rtdate").value;
+	//var fl = verifyPlaces();
+	if(d1==""){
+		document.getElementById('errstdate').innerHTML="Enter a start date!"; 
+		//fl=1;
+	}
+
+	if(d1>d2&&d2!=""){
+		document.getElementById('errstdate').innerHTML="Start date cannot be lesser than return date!";
+		//fl=1;
+		
+	}
+	else{
+		//clearFields();
 	var ticketsCount = document.getElementById('numberofticket').value;
 	var availableTickets = 51 - parseInt(ticketsCount);
     var container = document.getElementById("container");
@@ -34,6 +49,12 @@ function ticketsAvailability() {
 		alert("Maximum seats are 50. Cannot book more than 50 seats.");
 	  
 	}
+	if(parseInt(ticketsCount) == 0 ){
+	  	//alert("Congratulation " + availableTickets+  " tickets is available");
+		alert("Book at least 1 ticket");
+	  
+	}
+	}
 }
 
 
@@ -42,16 +63,60 @@ function tableCreate(num) {
 	  var tbl = document.createElement('table');
 	  tbl.style.offsetWidth;
 	  var tbdy = document.createElement('tbody');
+	  var trh = document.createElement('tr');
+		var th = document.createElement('th');
+		th.innerHTML = "Name";
+		trh.appendChild(th);
+		th = document.createElement('th');
+		th.innerHTML = "Gender";
+		trh.appendChild(th);
+		th = document.createElement('th');
+		th.innerHTML = "Age";
+		trh.appendChild(th);
+		th = document.createElement('th');
+		th.innerHTML = "Price(Rs)";
+		trh.appendChild(th);
+		tbdy.appendChild(trh);
+		tbl.appendChild(tbdy);
+		tabdiv.appendChild(tbl);
 	  for (var i = 0; i < num; i++) {
 		  console.log("i is - " + i);
 	    var tr = document.createElement('tr');
-	    for (var j = 0; j < 3; j++) {
+	    for (var j = 0; j < 4; j++) {
 	    	console.log("j is - " + j);
-	        var td = document.createElement('td');
-	var input = document.createElement("input");
-	        input.type = "text";
-	        input.name = "member" + i;
-	input.value="";
+	    	var td = document.createElement('td');
+			var input;
+			if(j!=1){
+			input = document.createElement("input");
+			input.type = "text";
+			input.name = "member" + i;
+			input.value="";
+			}else{
+				input = document.createElement("select");
+				input.setAttribute("name", "gendropdown");
+				input.setAttribute("id", "gendd");
+
+			    option = document.createElement("option");
+			    option.setAttribute("value", "Male");
+			    option.innerHTML = "Male";
+			    input.appendChild(option);
+
+			    option = document.createElement("option");
+			    option.setAttribute("value", "Female");
+			    option.innerHTML = "Female";
+			    input.appendChild(option);
+			}
+			if(j==0){
+				//input.setAttribute("onkeypress", "return check(event,value)");
+				input.setAttribute("oninput", "checkLength(40,this)");
+			}else if(j==2){
+				input.setAttribute("maxlength", "2");
+				input.setAttribute("size", "1");
+				input.setAttribute("onkeypress", "return isNumber(event)");
+			}else if(j==3){
+				input.setAttribute("size", "3");
+				input.readOnly=true;
+			}
 	
 	/*if(j==2){
 	input.disabled = true;
@@ -140,7 +205,7 @@ function removeEntryTables(){
 	}	
 }
 function getPrice(){
-	var tbldiv = document.getElementById('passform');
+	var tbldiv = document.getElementById('container');
 	var tblrow = tbldiv.getElementsByTagName('tr');
 	var price;
 	for (var i = 1; i < tblrow.length; i++) {
@@ -170,11 +235,11 @@ function getPrice(){
 	input.value = totalPrice();
 	input.readOnly=true;
 	container.appendChild(input);
-	document.getElementById('subbtn').disabled=false;
+	//document.getElementById('subbtn').disabled=false;
 }
 
 function totalPrice(){
-	var tbldiv = document.getElementById('passform');
+	var tbldiv = document.getElementById('container');
 	var tblrow = tbldiv.getElementsByTagName('tr');
 	var tot=parseInt("0") ;
 	for (var i = 1; i < tblrow.length; i++) {
@@ -182,7 +247,33 @@ function totalPrice(){
 	}
 	return tot;
 }
+function verifyDates(){
+	var d1 = document.getElementById("stdate").value;
+	var d2 = document.getElementById("rtdate").value;
+	//var fl = verifyPlaces();
+	if(d1==""){
+		document.getElementById('errstdate').innerHTML="Enter a start date!"; 
+		//fl=1;
+	}
 
+	if(d1>d2&&d2!=""){
+		document.getElementById('errstdate').innerHTML="Start date cannot be lesser than return date!";
+		//fl=1;
+	}
+//	if(fl==0){
+//		document.getElementById('errstdate').innerHTML=""; 
+//		document.getElementById('errrtdate').innerHTML="";
+//		document.getElementById('errplace').innerHTML="";
+//		document.getElementById('stavail').innerHTML="Congratulations! 50 tickets available.";
+//		document.getElementById('passdet').disabled=false;		
+//		document.getElementById('addpass').disabled=false;
+//	}
+}
+function succMsg(){
+	var p1 = document.getElementById("splace").value;
+		var p2 = document.getElementById("dplace").value;
+	document.getElementById('tsuccessmesg').innerHTML="Tickets booked successfully from " + p1 + " to " + p2 + ". Have a nice journey";
+	}
 
 $(document).ready(function(){
 	var dtToday = new Date(); 
