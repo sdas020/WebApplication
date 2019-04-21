@@ -36,7 +36,9 @@
 <input type="date" id="rtdate" name="rday" onclick="verifyDates()">
 <span id="errrtdate"></span> 
 </p>
-enter email:<input type="email" name="userEmail" />
+<span id="emailDetails"></span>
+enter email:<input type="email" id="userEmail" >
+<span id="numberofTicketDetails"></span>
 enter number of seats to book:<input type="number" name="NumberOfTicket" id="numberofticket" value=""/> 
 <button type="button" class="Seats availability" name="Seats availability" onclick="ticketsAvailability()" >Check seats availability</button>
 <div id="passform">

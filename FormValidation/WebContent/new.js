@@ -165,6 +165,7 @@ function selectdate(){
           
        });
    });
+   clearFields();
 }
 function verifyPlaces(){
 	var p1 = document.getElementById("splace").value;
@@ -232,6 +233,7 @@ function getPrice(){
 	// Create an <input> element, set its type and name attributes
 	var input = document.createElement("input");
 	input.type = "text";
+	input.id="priceDetails";
 	input.value = totalPrice();
 	input.readOnly=true;
 	container.appendChild(input);
@@ -268,12 +270,72 @@ function verifyDates(){
 //		document.getElementById('passdet').disabled=false;		
 //		document.getElementById('addpass').disabled=false;
 //	}
+	clearFields();
 }
 function succMsg(){
+	var d1 = document.getElementById("stdate").value;
+	var d2 = document.getElementById("rtdate").value;
+	//var fl = verifyPlaces();
+	if(d1==""){
+		document.getElementById('errstdate').innerHTML="Enter a start date!"; 
+		//fl=1;
+	}
+
+	if(d1>d2&&d2!=""){
+		document.getElementById('errstdate').innerHTML="Start date cannot be lesser than return date!";
+		//fl=1;
+		
+	}
+	var p1 = document.getElementById("splace").value;
+	var p2 = document.getElementById("dplace").value;
+	var pl=0;
+	if(p1==p2){
+		document.getElementById('errplace').innerHTML="Source and Destination cannot be of the same place!";
+		pl=1;
+	}
+	var email=document.getElementById("userEmail").value;
+	if(email==""){
+		document.getElementById('emailDetails').innerHTML="Email field cannot be null!";
+		
+	}
+	var numberOfseats=document.getElementById("numberofticket").value;
+	if(numberOfseats==""){
+		document.getElementById('numberofTicketDetails').innerHTML="At least 1 ticket need to book";
+		
+	}
+	var priceDetails = document.getElementById("priceDetails").value;
+	if(priceDetails==""){
+		document.getElementById('totalspan').innerHTML="Ticket details has not updated";
+		
+	}
+	if(priceDetails!="")
+	
+		{
 	var p1 = document.getElementById("splace").value;
 		var p2 = document.getElementById("dplace").value;
-	document.getElementById('tsuccessmesg').innerHTML="Tickets booked successfully from " + p1 + " to " + p2 + ". Have a nice journey";
+		if(d1!="" && !d2>d1&&d2==d1 && p1!=p2 && email!="" && numberOfseats!="" && priceDetails!=""){
+			document.getElementById('tsuccessmesg').innerHTML="Tickets booked successfully from " + p1 + " to " + p2 + ". Have a nice journey"; 
+			//fl=1;
+		}
+//		if(d1!=""){
+//			if(d1<d2&&d1==d2&&d2!=""){
+//				if(p1!=p2){
+//					if(email!=""){
+//						if(numberOfseats!=""){
+//							if(priceDetails!=""){
+//								alert("Tickets booked successfully from " + p1 + " to " + p2 + ". Have a nice journey");
+//								
+//							}
+//						}
+//					}
+//				}
+//				
+//			}
+//		}
+	//document.getElementById('tsuccessmesg').innerHTML="Tickets booked successfully from " + p1 + " to " + p2 + ". Have a nice journey";
+	//alert("Tickets booked successfully from " + p1 + " to " + p2 + ". Have a nice journey");
 	}
+}
 
 $(document).ready(function(){
 	var dtToday = new Date(); 
@@ -287,4 +349,5 @@ $(document).ready(function(){
 	var maxDate = year + '-' + month + '-' + day;
 	$('#stdate').attr('min', maxDate);
 	$('#rtdate').attr('min', maxDate);
+	clearFields();
 });
