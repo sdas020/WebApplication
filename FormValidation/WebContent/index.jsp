@@ -46,8 +46,8 @@ enter number of seats to book:<input type="number" name="NumberOfTicket" id="num
 <p id="message"></p>
 <div id="smtfinal">
 <span id="totalspan"></span>
-<input id="prcbtn" type="button" onclick="getPrice()" value="Estimate Price" >
-<input id="subbtn" type="button" onclick="succMsg()" value="Book Now" >
+<input id="prcbtn" type="button" onclick="getPrice()" value="Estimate Price">
+<input id="subbtn" type="button" onclick="succMsg()" value="Book Now" disabled>
 <span id="tsuccessmesg"></span>
 </div>
 <div id="container">

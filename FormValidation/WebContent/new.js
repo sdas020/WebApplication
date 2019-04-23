@@ -18,24 +18,44 @@ function ticketsAvailability1() {
 function ticketsAvailability() {
 	var d1 = document.getElementById("stdate").value;
 	var d2 = document.getElementById("rtdate").value;
+	var email = document.getElementById("userEmail").value;
+	if(email==""){
+		document.getElementById('emailDetails').innerHTML="Email cannot be empty!";
+		document.getElementById("prcbtn").disabled=true;
+		
+	}
 	//var fl = verifyPlaces();
 	if(d1==""){
 		document.getElementById('errstdate').innerHTML="Enter a start date!"; 
-		//fl=1;
+		document.getElementById("prcbtn").disabled=true;
 	}
-
+	if(d2==""){
+		document.getElementById('errrtdate').innerHTML="Enter a end date!"; 
+		document.getElementById("prcbtn").disabled=true;
+	}
+	var p1 = document.getElementById("splace").value;
+	var p2 = document.getElementById("dplace").value;
+	
+	if(p1==p2){
+		document.getElementById('errplace').innerHTML="Source and Destination cannot be of the same place!";
+		document.getElementById("prcbtn").disabled=true;
+	}
 	if(d1>d2&&d2!=""){
 		document.getElementById('errstdate').innerHTML="Start date cannot be lesser than return date!";
-		//fl=1;
+		document.getElementById("prcbtn").disabled=true;
 		
 	}
+	
+	
 	else{
-		//clearFields();
+		
+		//document.getElementById("prcbtn").disabled=true;
 	var ticketsCount = document.getElementById('numberofticket').value;
 	var availableTickets = 51 - parseInt(ticketsCount);
     var container = document.getElementById("container");
 	if(availableTickets > 0 ){
 	  	//alert("Congratulation " + availableTickets+  " tickets is available");
+		document.getElementById("prcbtn").disabled=false;
 		console.log("Calling tableCreate()");
 		console.log("ticketsCount is - " + ticketsCount);
 		//var container = document.getElementById('container');
@@ -46,13 +66,13 @@ function ticketsAvailability() {
 	  }
 	if(parseInt(ticketsCount) > 50 ){
 	  	//alert("Congratulation " + availableTickets+  " tickets is available");
-		alert("Maximum seats are 50. Cannot book more than 50 seats.");
-	  
+		alert("Maximum seats are 50. Cannot book more than 50 seats4.");
+		
 	}
 	if(parseInt(ticketsCount) == 0 ){
 	  	//alert("Congratulation " + availableTickets+  " tickets is available");
 		alert("Book at least 1 ticket");
-	  
+		
 	}
 	}
 }
@@ -112,7 +132,8 @@ function tableCreate(num) {
 			}else if(j==2){
 				input.setAttribute("maxlength", "2");
 				input.setAttribute("size", "1");
-				input.setAttribute("onkeypress", "return isNumber(event)");
+				input.id="AgeDetails"
+				//input.setAttribute("onkeypress", "return isNumber(event)");
 			}else if(j==3){
 				input.setAttribute("size", "3");
 				input.readOnly=true;
@@ -128,6 +149,11 @@ function tableCreate(num) {
 	  }
 	  tbl.appendChild(tbdy);
 	  tabdiv.appendChild(tbl)
+//	  var Agedetails=document.getElementById('AgeDetails');
+//	  if(Agedetails>0)
+//		  {
+//		  document.getElementById('prcbtn').disabled=false;
+//		  }
 	}
 
 
@@ -237,6 +263,45 @@ function getPrice(){
 	input.value = totalPrice();
 	input.readOnly=true;
 	container.appendChild(input);
+	var priceDetails = document.getElementById("priceDetails").value;
+	if(priceDetails>0){
+		var p1 = document.getElementById("splace").value;
+		var p2 = document.getElementById("dplace").value;
+		var d1 = document.getElementById("stdate").value;
+		var d2 = document.getElementById("rtdate").value;
+		if(p1!=p2){
+			//
+			var email = document.getElementById("userEmail").value;
+			if(email!="")
+				{
+            if(d1=="")
+            	{
+            	document.getElementById('errstdate').innerHTML="Enter a start date!";
+            	}
+            if(d2=="")
+        	{
+        	document.getElementById('errrtdate').innerHTML="Enter a end date!";
+        	}
+            if(d1>d2)
+            	{
+            	document.getElementById('errstdate').innerHTML="Start date cannot be lesser than return date!";
+        		
+            	}
+            else{
+		      document.getElementById('subbtn').disabled=false;
+            }
+				}
+			else
+				{
+				//alert("Please enter email!");
+				document.getElementById('emailDetails').innerHTML="Please enter email!"; 
+				}
+		}
+		else
+			{
+			alert("Source and destination cannot be same");
+			}
+	}
 	//document.getElementById('subbtn').disabled=false;
 }
 
@@ -273,69 +338,14 @@ function verifyDates(){
 	clearFields();
 }
 function succMsg(){
-	var d1 = document.getElementById("stdate").value;
-	var d2 = document.getElementById("rtdate").value;
-	//var fl = verifyPlaces();
-	if(d1==""){
-		document.getElementById('errstdate').innerHTML="Enter a start date!"; 
-		//fl=1;
-	}
 
-	if(d1>d2&&d2!=""){
-		document.getElementById('errstdate').innerHTML="Start date cannot be lesser than return date!";
-		//fl=1;
-		
-	}
 	var p1 = document.getElementById("splace").value;
 	var p2 = document.getElementById("dplace").value;
-	var pl=0;
-	if(p1==p2){
-		document.getElementById('errplace').innerHTML="Source and Destination cannot be of the same place!";
-		pl=1;
-	}
-	var email=document.getElementById("userEmail").value;
-	if(email==""){
-		document.getElementById('emailDetails').innerHTML="Email field cannot be null!";
-		
-	}
-	var numberOfseats=document.getElementById("numberofticket").value;
-	if(numberOfseats==""){
-		document.getElementById('numberofTicketDetails').innerHTML="At least 1 ticket need to book";
-		
-	}
-	var priceDetails = document.getElementById("priceDetails").value;
-	if(priceDetails==""){
-		document.getElementById('totalspan').innerHTML="Ticket details has not updated";
-		
-	}
-	if(priceDetails!="")
+
+	document.getElementById('tsuccessmesg').innerHTML="Tickets booked successfully from " + p1 + " to " + p2 + ". Have a nice journey"; 
 	
-		{
-	var p1 = document.getElementById("splace").value;
-		var p2 = document.getElementById("dplace").value;
-		if(d1!="" && !d2>d1&&d2==d1 && p1!=p2 && email!="" && numberOfseats!="" && priceDetails!=""){
-			document.getElementById('tsuccessmesg').innerHTML="Tickets booked successfully from " + p1 + " to " + p2 + ". Have a nice journey"; 
-			//fl=1;
-		}
-//		if(d1!=""){
-//			if(d1<d2&&d1==d2&&d2!=""){
-//				if(p1!=p2){
-//					if(email!=""){
-//						if(numberOfseats!=""){
-//							if(priceDetails!=""){
-//								alert("Tickets booked successfully from " + p1 + " to " + p2 + ". Have a nice journey");
-//								
-//							}
-//						}
-//					}
-//				}
-//				
-//			}
-//		}
-	//document.getElementById('tsuccessmesg').innerHTML="Tickets booked successfully from " + p1 + " to " + p2 + ". Have a nice journey";
-	//alert("Tickets booked successfully from " + p1 + " to " + p2 + ". Have a nice journey");
 	}
-}
+
 
 $(document).ready(function(){
 	var dtToday = new Date(); 
