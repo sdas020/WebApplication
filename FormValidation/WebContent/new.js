@@ -19,6 +19,10 @@ function ticketsAvailability() {
 	var d1 = document.getElementById("stdate").value;
 	var d2 = document.getElementById("rtdate").value;
 	var email = document.getElementById("userEmail").value;
+	var p1 = document.getElementById("splace").value;
+	var p2 = document.getElementById("dplace").value;
+	if(document.getElementById("OnwardJorney").checked)
+		{
 	if(email==""){
 		document.getElementById('emailDetails').innerHTML="Email cannot be empty!";
 		document.getElementById("prcbtn").disabled=true;
@@ -29,25 +33,19 @@ function ticketsAvailability() {
 		document.getElementById('errstdate').innerHTML="Enter a start date!"; 
 		document.getElementById("prcbtn").disabled=true;
 	}
-	if(d2==""){
-		document.getElementById('errrtdate').innerHTML="Enter a end date!"; 
-		document.getElementById("prcbtn").disabled=true;
-	}
-	var p1 = document.getElementById("splace").value;
-	var p2 = document.getElementById("dplace").value;
+
+//	var p1 = document.getElementById("splace").value;
+//	var p2 = document.getElementById("dplace").value;
 	
 	if(p1==p2){
 		document.getElementById('errplace').innerHTML="Source and Destination cannot be of the same place!";
 		document.getElementById("prcbtn").disabled=true;
 	}
-	if(d1>d2&&d2!=""){
-		document.getElementById('errstdate').innerHTML="Start date cannot be lesser than return date!";
-		document.getElementById("prcbtn").disabled=true;
-		
-	}
 	
 	
-	else{
+	
+	if(p1!=p2 && d1!="" && email!="")
+		{
 		
 		//document.getElementById("prcbtn").disabled=true;
 	var ticketsCount = document.getElementById('numberofticket').value;
@@ -66,7 +64,7 @@ function ticketsAvailability() {
 	  }
 	if(parseInt(ticketsCount) > 50 ){
 	  	//alert("Congratulation " + availableTickets+  " tickets is available");
-		alert("Maximum seats are 50. Cannot book more than 50 seats4.");
+		alert("Maximum seats are 50. Cannot book more than 50 seats.");
 		
 	}
 	if(parseInt(ticketsCount) == 0 ){
@@ -75,6 +73,67 @@ function ticketsAvailability() {
 		
 	}
 	}
+		}
+	else
+		{
+		if(email==""){
+			document.getElementById('emailDetails').innerHTML="Email cannot be empty!";
+			document.getElementById("prcbtn").disabled=true;
+			
+		}
+		//var fl = verifyPlaces();
+		if(d1==""){
+			document.getElementById('errstdate').innerHTML="Enter a start date!"; 
+			document.getElementById("prcbtn").disabled=true;
+		}
+		if(d2==""){
+			document.getElementById('errrtdate').innerHTML="Enter a end date!"; 
+			document.getElementById("prcbtn").disabled=true;
+		}
+		var p1 = document.getElementById("splace").value;
+		var p2 = document.getElementById("dplace").value;
+		
+		if(p1==p2){
+			document.getElementById('errplace').innerHTML="Source and Destination cannot be of the same place!";
+			document.getElementById("prcbtn").disabled=true;
+		}
+		if(d1>d2&&d2!=""){
+			document.getElementById('errstdate').innerHTML="Start date cannot be lesser than return date!";
+			document.getElementById("prcbtn").disabled=true;
+			
+		}
+		
+		
+		if(p1!=p2 && d1!="" && d2!="" && d2>d1 || d1==d2 && email!="")
+		{
+			
+			//document.getElementById("prcbtn").disabled=true;
+		var ticketsCount = document.getElementById('numberofticket').value;
+		var availableTickets = 51 - parseInt(ticketsCount);
+	    var container = document.getElementById("container");
+		if(availableTickets > 0 ){
+		  	//alert("Congratulation " + availableTickets+  " tickets is available");
+			document.getElementById("prcbtn").disabled=false;
+			console.log("Calling tableCreate()");
+			console.log("ticketsCount is - " + ticketsCount);
+			//var container = document.getElementById('container');
+			while (container.hasChildNodes()) {
+				container.removeChild(container.lastChild);
+		    }
+			 tableCreate(ticketsCount);
+		  }
+		if(parseInt(ticketsCount) > 50 ){
+		  	//alert("Congratulation " + availableTickets+  " tickets is available");
+			alert("Maximum seats are 50. Cannot book more than 50 seats.");
+			
+		}
+		if(parseInt(ticketsCount) == 0 ){
+		  	//alert("Congratulation " + availableTickets+  " tickets is available");
+			alert("Book at least 1 ticket");
+			
+		}
+		}
+		}
 }
 
 
@@ -232,6 +291,11 @@ function removeEntryTables(){
 	}	
 }
 function getPrice(){
+	var numberOfTicket=document.getElementById("numberofticket").value;
+	if(parseInt(numberOfTicket) < 51 ){
+	  	
+		document.getElementById('prcbtn').disabled=false;	
+	
 	var tbldiv = document.getElementById('container');
 	var tblrow = tbldiv.getElementsByTagName('tr');
 	var price;
@@ -263,6 +327,7 @@ function getPrice(){
 	input.value = totalPrice();
 	input.readOnly=true;
 	container.appendChild(input);
+	document.getElementById("prcbtn").disabled=true;
 	var priceDetails = document.getElementById("priceDetails").value;
 	if(priceDetails>0){
 		var p1 = document.getElementById("splace").value;
@@ -278,18 +343,28 @@ function getPrice(){
             	{
             	document.getElementById('errstdate').innerHTML="Enter a start date!";
             	}
-            if(d2=="")
-        	{
-        	document.getElementById('errrtdate').innerHTML="Enter a end date!";
-        	}
-            if(d1>d2)
-            	{
-            	document.getElementById('errstdate').innerHTML="Start date cannot be lesser than return date!";
-        		
-            	}
-            else{
-		      document.getElementById('subbtn').disabled=false;
-            }
+                  if(document.getElementById("OnwardJorney").checked)
+                     {
+                         
+                         
+		                        document.getElementById('subbtn').disabled=false;
+                             
+				     }
+                  if(document.getElementById("ReturnJouney").checked)
+                  {
+                	      if(d2=="")
+  	                        {
+  	                           document.getElementById('errrtdate').innerHTML="Enter a end date!";
+  	                        }
+                          if(d1>d2)
+      	                   {
+      	                      document.getElementById('errstdate').innerHTML="Start date cannot be lesser than return date!";
+             	           }
+                          else
+                           {
+	                          document.getElementById('subbtn').disabled=false;
+                           }
+                	  }
 				}
 			else
 				{
@@ -304,7 +379,7 @@ function getPrice(){
 	}
 	//document.getElementById('subbtn').disabled=false;
 }
-
+}
 function totalPrice(){
 	var tbldiv = document.getElementById('container');
 	var tblrow = tbldiv.getElementsByTagName('tr');
@@ -341,12 +416,62 @@ function succMsg(){
 
 	var p1 = document.getElementById("splace").value;
 	var p2 = document.getElementById("dplace").value;
-
-	document.getElementById('tsuccessmesg').innerHTML="Tickets booked successfully from " + p1 + " to " + p2 + ". Have a nice journey"; 
-	
+    var numberofTicket=document.getElementById("numberofticket").value;
+    if(document.getElementById("ReturnJouney").checked)
+    {
+	document.getElementById('tsuccessmesg').innerHTML=numberofTicket +"Tickets booked successfully from " + p1 + " to " + p2 + ". Have a nice journey"; 
+	document.getElementById("subbtn").disabled=true;
+	document.getElementById("SeatsAvailabilityDetails").disabled=true;
+    }
+    if(document.getElementById("OnwardJorney").checked)
+    {
+	document.getElementById('tsuccessmesg').innerHTML=numberofTicket +"Tickets booked successfully from " + p1 + " to " + p2 + ". Have a nice journey"; 
+	document.getElementById("subbtn").disabled=true;
+	document.getElementById("SeatsAvailabilityDetails").disabled=true;
+    }
+    else if(document.getElementById("ReturnJouney").unchecked && document.getElementById("OnwardJorney").unchecked)
+    {
+    	document.getElementById('tsuccessmesg').innerHTML="Please select type of journey Onward or Return"; 	
+    }
+    
 	}
+function enableDisable(bEnable, textBoxID)
+{
+	
+	 document.getElementById('splace').disabled=false;
+	 document.getElementById('dplace').disabled=false;
+	 document.getElementById('stdate').disabled=false;
+	 document.getElementById('userEmail').disabled=false;
+	 document.getElementById('numberofticket').disabled=false;
+	 document.getElementById('SeatsAvailabilityDetails').disabled=false;
+	 document.getElementById('canbtn').disabled=false;
+     document.getElementById(textBoxID).disabled = !bEnable
+}
+function refresh()
+{
+	setTimeout(location.reload(), 1);
+}
 
+function emailFieldverification() {
+    var email;
 
+    email = document.getElementById("userEmail").value;
+
+        var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+
+        if (reg.test(textEmail.value) == false) 
+        {
+        document.getElementById("emailspace").style.color = "red";
+            document.getElementById("emailspace").innerHTML ="Invalid EMail ->"+ email;
+            alert('Invalid Email Address ->'+email);
+            return false;
+        } else{
+        document.getElementById("emailspace").style.color = "DarkGreen";      
+        document.getElementById("emailspace").innerHTML ="Valid Email ->"+email;
+        }
+
+   return true;
+}
 $(document).ready(function(){
 	var dtToday = new Date(); 
 	var month = dtToday.getMonth() + 1;
@@ -360,4 +485,9 @@ $(document).ready(function(){
 	$('#stdate').attr('min', maxDate);
 	$('#rtdate').attr('min', maxDate);
 	clearFields();
+});
+$(document).ready(function(){
+	if(document.getElementById('ReturnJouney').checked) {
+		document.getElementById('rtdate').disabled=false
+		}
 });

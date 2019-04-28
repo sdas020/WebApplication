@@ -11,43 +11,48 @@
 </marquee><h1>Welcome to Flight booking System</h1></marquee>
 </head>
 <body BACKGROUND="image.jpeg">
-<form > 
+
+  <input type="radio" name="JourneyType" id="OnwardJorney" onclick="enableDisable(this.unchecked, 'rtdate')">OnwardJorney
+  <input type="radio" name="JourneyType" id="ReturnJouney" onclick="enableDisable(this.checked, 'rtdate')">ReturnJourney<br><br>
+  
 <label>SourcePoint</label>   
-<select id="splace" name="SourcePoint" onchange="verifyPlaces()">  
+<select id="splace" name="SourcePoint" onchange="verifyPlaces()" disabled> 
+<option>Select</option>  
 <option>India</option>  
 <option>Pakistan</option>  
 <option>China</option> 
-<option>Other</option> 
 </select>
 <label>DestinationPoint</label> 
-<select id="dplace" name="DestinationPoint" onchange="verifyPlaces()">  
+<select id="dplace" name="DestinationPoint" onchange="verifyPlaces()" disabled>  
+<option>Select</option> 
 <option>India</option>  
 <option>Pakistan</option>  
 <option>China</option> 
-<option>Other</option>  
 </select> 
 <span id="errplace"></span>
 <label>Start Date: </label>
-<input type="date" id="stdate" onchange="selectdate()">
+<input type="date" id="stdate" onchange="selectdate()" disabled>
 <span id="errstdate"></span>
 </p>
 <p>
 <label>Return Date: </label>
-<input type="date" id="rtdate" name="rday" onclick="verifyDates()">
+<input type="date" id="rtdate" name="rday" onclick="verifyDates()" disabled>
 <span id="errrtdate"></span> 
 </p>
 <span id="emailDetails"></span>
-enter email:<input type="email" id="userEmail" >
+enter email:<input type="email" id="userEmail" onchange="emailFieldverification()" disabled>
+<p id="emailspace" style="color: red;"></p>
 <span id="numberofTicketDetails"></span>
-enter number of seats to book:<input type="number" name="NumberOfTicket" id="numberofticket" value=""/> 
-<button type="button" class="Seats availability" name="Seats availability" onclick="ticketsAvailability()" >Check seats availability</button>
+enter number of seats to book:<input type="number" name="NumberOfTicket" id="numberofticket"  min=0 oninput="validity.valid||(value='');" value="" disabled/> 
+<button type="button" id="SeatsAvailabilityDetails" class="Seats availability" name="Seats availability" onclick="ticketsAvailability()" disabled>Check seats availability</button>
 <div id="passform">
 </div>
 <p id="message"></p>
 <div id="smtfinal">
 <span id="totalspan"></span>
-<input id="prcbtn" type="button" onclick="getPrice()" value="Estimate Price">
+<input id="prcbtn" type="button" onclick="getPrice()" value="Estimate Price" disabled>
 <input id="subbtn" type="button" onclick="succMsg()" value="Book Now" disabled>
+<input id="canbtn" type="button" onclick="refresh()" value="Cancel" disabled>
 <span id="tsuccessmesg"></span>
 </div>
 <div id="container">
