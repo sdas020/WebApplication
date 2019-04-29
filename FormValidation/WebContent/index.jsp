@@ -43,7 +43,7 @@
 enter email:<input type="email" id="userEmail" onchange="emailFieldverification()" disabled>
 <p id="emailspace" style="color: red;"></p>
 <span id="numberofTicketDetails"></span>
-enter number of seats to book:<input type="number" name="NumberOfTicket" id="numberofticket"  min=0 oninput="validity.valid||(value='');" value="" disabled/> 
+enter number of seats to book:<input type="number" name="NumberOfTicket" id="numberofticket"  min=1 oninput="validity.valid||(value='');" value="" disabled/> 
 <button type="button" id="SeatsAvailabilityDetails" class="Seats availability" name="Seats availability" onclick="ticketsAvailability()" disabled>Check seats availability</button>
 <div id="passform">
 </div>

@@ -21,6 +21,17 @@ function ticketsAvailability() {
 	var email = document.getElementById("userEmail").value;
 	var p1 = document.getElementById("splace").value;
 	var p2 = document.getElementById("dplace").value;
+	var ticketsCount = document.getElementById('numberofticket').value;
+	if(parseInt(ticketsCount) > 50 ){
+	  	//alert("Congratulation " + availableTickets+  " tickets is available");
+		alert("Maximum seats are 50. Cannot book more than 50 seats.");
+		
+	}
+	if(parseInt(ticketsCount) == 0 ){
+	  	//alert("Congratulation " + availableTickets+  " tickets is available");
+		alert("Book at least 1 ticket");
+		
+	}
 	if(document.getElementById("OnwardJorney").checked)
 		{
 	if(email==""){
@@ -48,7 +59,7 @@ function ticketsAvailability() {
 		{
 		
 		//document.getElementById("prcbtn").disabled=true;
-	var ticketsCount = document.getElementById('numberofticket').value;
+	
 	var availableTickets = 51 - parseInt(ticketsCount);
     var container = document.getElementById("container");
 	if(availableTickets > 0 ){
@@ -122,16 +133,16 @@ function ticketsAvailability() {
 		    }
 			 tableCreate(ticketsCount);
 		  }
-		if(parseInt(ticketsCount) > 50 ){
-		  	//alert("Congratulation " + availableTickets+  " tickets is available");
-			alert("Maximum seats are 50. Cannot book more than 50 seats.");
-			
-		}
-		if(parseInt(ticketsCount) == 0 ){
-		  	//alert("Congratulation " + availableTickets+  " tickets is available");
-			alert("Book at least 1 ticket");
-			
-		}
+//		if(parseInt(ticketsCount) > 50 ){
+//		  	//alert("Congratulation " + availableTickets+  " tickets is available");
+//			alert("Maximum seats are 50. Cannot book more than 50 seats.");
+//			
+//		}
+//		if(parseInt(ticketsCount) == 0 ){
+//		  	//alert("Congratulation " + availableTickets+  " tickets is available");
+//			alert("Book at least 1 ticket");
+//			
+//		}
 		}
 		}
 }
